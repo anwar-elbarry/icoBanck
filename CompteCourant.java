@@ -1,4 +1,16 @@
-package PACKAGE_NAME;
+public class CompteCourant extends compte{
 
-public class CompteCourant {
+ protected double decouvert;
+    @Override
+    public void retirer(double montant) {
+        return;
+    }
+    @Override
+    public  double calculerInteret(){
+        return 0;
+    }
+    @Override
+    public void afficherDetails(){
+        return;
+    }
 }
