@@ -1,4 +1,27 @@
-package PACKAGE_NAME;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
-public class operation {
+public abstract class operation {
+    protected String numero ;
+    protected LocalDateTime date;
+    protected double montant;
+
+    public operation(double montant) {
+        this.numero = UUID.randomUUID().toString();
+        this.date = LocalDateTime.now();
+        this.montant = montant;
+    }
+
+    public String getNumero(){
+        return numero;
+    }
+
+    public LocalDateTime getDate(){
+        return date;
+    }
+
+    public double getMontant(){
+        return  montant;
+    }
+
 }
