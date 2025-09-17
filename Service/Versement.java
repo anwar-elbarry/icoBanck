@@ -1,11 +1,18 @@
-import Service.operation;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+package Service;
 
 public class Versement extends operation {
-   protected ArrayList<String> source = new ArrayList<>(Arrays.asList( "Virement externe", "Dépôt espèces", "Salaire"));
-    public Versement(double montant) {
+   private String source ;
+    public Versement(String code,double montant,String source) {
         super(montant);
+        this.source = source;
+    }
+
+    @Override
+    public String getType() {
+        return "Versement";
+    }
+
+    public String getSource(){
+        return this.source;
     }
 }
