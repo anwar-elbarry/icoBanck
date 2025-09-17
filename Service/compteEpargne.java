@@ -1,17 +1,30 @@
+package Service;
 
-public class compteEpargne extends compte{
+public class compteEpargne extends compte {
    protected double tauxInteret;
 
+   public compteEpargne(String code,double montant,double tauxInteret){
+       super(code,montant);
+       this.tauxInteret = tauxInteret;
+   }
+
     @Override
-    public void retirer(double montant) {
-        return;
+    public void retirer(String code,double montant) {
+       if(solde >= montant){
+           this.solde -= montant ;
+       }else{
+           System.out.println("⚠\uFE0F Retrait refusé : solde insuffisant.");
+       }
     }
+
     @Override
     public  double calculerInteret(){
-     return 3;
+     return solde * tauxInteret;
     }
+
     @Override
     public void afficherDetails(){
-        return;
+        System.out.println("code :"+this.code);
+        System.out.println("solde :"+this.solde+"DH");
     }
 }
