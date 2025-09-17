@@ -24,6 +24,7 @@ public class compteCourant extends compte {
 
     @Override
     public void afficherDetails(){
+        System.out.println("-------------------------------");
         System.out.println("code : "+code);
         System.out.println("solde : "+solde+"DH");
     }

@@ -5,10 +5,6 @@ public class BankService {
 private HashMap<String , compte> comptes = new HashMap<>();
     private String code;
 
-    public void ajouterCompte(compte c){
-      comptes.put(c.getCode(),c);
-  }
-
   public void creerCompteCourant(String code,double montant,double decouvert){
     compte c = new compteCourant(code,montant,decouvert);
     comptes.put(c.getCode(),c);
@@ -21,9 +17,10 @@ private HashMap<String , compte> comptes = new HashMap<>();
   }
 
   public void effectuerVersement(String code,double montant,String source){
-      Versement ver = new Versement(code,montant,source);
-
+        Versement ver = new Versement(code,montant,source);
         System.out.println("versement de "+montant + "de source("+source+")");
+        compte c = comptes.get(code);
+        c.deposer(ver);
   }
 
   public void effectuerRetrait(double montant,String destination){
@@ -49,4 +46,12 @@ if (list.isEmpty()){
     }
     }
 }
+  public void ListOperations(String code){
+    compte c = comptes.get(code);
+    List<operation> operations = new ArrayList<>(c.listOperations());
+    System.out.println("Opérations pour le compte " + code + ":");
+    for (operation o :operations){
+      System.out.println(o.toString());
+    }
+  }
 }

@@ -21,7 +21,16 @@ public abstract class compte {
  public abstract double calculerInteret();
  public abstract void afficherDetails();
 
+ public void deposer(Versement v) {
+  if (v.getMontant() <= 0) throw new IllegalArgumentException("Montant de versement doit être positif");
+  this.solde += v.getMontant();
+  ajouterOperation(v);
+ }
  public void ajouterOperation(operation op){
   listOperations.add(op);
+ }
+
+ public List<operation> listOperations(){
+   return this.listOperations;
  }
 }

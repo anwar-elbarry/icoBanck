@@ -24,6 +24,7 @@ public class compteEpargne extends compte {
 
     @Override
     public void afficherDetails(){
+        System.out.println("-------------------------------");
         System.out.println("code :"+this.code);
         System.out.println("solde :"+this.solde+"DH");
     }

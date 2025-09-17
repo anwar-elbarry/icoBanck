@@ -1,3 +1,5 @@
+package Service;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -24,4 +26,10 @@ public abstract class operation {
         return  montant;
     }
 
+    public abstract String getType();
+
+    @Override
+    public String toString() {
+        return "[" + getType() + "] " + "nº=" + numero + ", date=" + date + ", montant=" + montant;
+    }
 }
