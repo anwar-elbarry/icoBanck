@@ -22,6 +22,7 @@ private HashMap<String , compte> comptes = new HashMap<>();
 
   public void effectuerVersement(String code,double montant,String source){
       Versement ver = new Versement(code,montant,source);
+
         System.out.println("versement de "+montant + "de source("+source+")");
   }
 
@@ -30,7 +31,22 @@ private HashMap<String , compte> comptes = new HashMap<>();
   }
 
   public boolean trouverCompte(String code){
-      compte c = comptes.get(code);
-      return c != null;
+    compte c = comptes.get(code);
+    return c != null;
   }
+
+  public double trouverSolde(String code){
+      return comptes.get(code).solde;
+  }
+
+  public void showList() {
+    ArrayList<compte> list = new ArrayList<>(comptes.values());
+if (list.isEmpty()){
+  System.out.println("no comptes");
+}else {
+    for (compte c : list) {
+      c.afficherDetails();
+    }
+    }
+}
 }
