@@ -3,8 +3,9 @@ import java.util.*;
 
 public class BankService {
 private HashMap<String , compte> comptes = new HashMap<>();
+    private String code;
 
-  public void ajouterCompte(compte c){
+    public void ajouterCompte(compte c){
       comptes.put(c.getCode(),c);
   }
 
@@ -28,7 +29,8 @@ private HashMap<String , compte> comptes = new HashMap<>();
       Retrait ret = new Retrait(montant,destination);
   }
 
-  public compte trouverCompte(String code){
-    return comptes.get(code);
+  public boolean trouverCompte(String code){
+      compte c = comptes.get(code);
+      return c != null;
   }
 }
