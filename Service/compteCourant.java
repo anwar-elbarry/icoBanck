@@ -9,10 +9,11 @@ public class compteCourant extends compte {
          this.decouvert = decouvert;
      }
 
-    @Override
-    public void retirer(String code,double montant) {
-         if(solde - montant >= -decouvert){
-             this.solde -= montant;
+     @Override
+    public void retirer(Retrait r) {
+         if(solde - r.montant >= -decouvert){
+             this.solde -= r.montant;
+             ajouterOperation(r);
          }else{
              System.out.println("⚠\uFE0F Retrait refusé : dépassement du découvert autorisé.");
          }

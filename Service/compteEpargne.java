@@ -9,9 +9,10 @@ public class compteEpargne extends compte {
    }
 
     @Override
-    public void retirer(String code,double montant) {
-       if(solde >= montant){
-           this.solde -= montant ;
+    public void retirer(Retrait r) {
+       if(solde >= r.montant){
+           this.solde -= r.montant ;
+           ajouterOperation(r);
        }else{
            System.out.println("⚠\uFE0F Retrait refusé : solde insuffisant.");
        }
