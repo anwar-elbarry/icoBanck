@@ -28,5 +28,6 @@ public class compteEpargne extends compte {
         System.out.println("-------------------------------");
         System.out.println("code :"+this.code);
         System.out.println("solde :"+this.solde+"DH");
+        System.out.println("Taux d'intérêt: " + tauxInteret);
     }
 }
