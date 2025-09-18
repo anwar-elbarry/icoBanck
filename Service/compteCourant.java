@@ -28,5 +28,6 @@ public class compteCourant extends compte {
         System.out.println("-------------------------------");
         System.out.println("code : "+code);
         System.out.println("solde : "+solde+"DH");
+        System.out.println("Découvert autorisé : " + decouvert);
     }
 }
