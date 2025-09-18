@@ -17,7 +17,7 @@ public abstract class compte {
  public String getCode(){return code;};
  public double getSolde(){return solde;};
 
- public abstract void retirer(String code,double montant);
+ public abstract void retirer(Retrait r);
  public abstract double calculerInteret();
  public abstract void afficherDetails();
 
@@ -26,6 +26,7 @@ public abstract class compte {
   this.solde += v.getMontant();
   ajouterOperation(v);
  }
+
  public void ajouterOperation(operation op){
   listOperations.add(op);
  }
