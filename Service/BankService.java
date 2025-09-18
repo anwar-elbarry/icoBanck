@@ -23,8 +23,10 @@ private HashMap<String , compte> comptes = new HashMap<>();
         c.deposer(ver);
   }
 
-  public void effectuerRetrait(double montant,String destination){
+  public void effectuerRetrait(String code,double montant,String destination){
+      compte c = comptes.get(code);
       Retrait ret = new Retrait(montant,destination);
+      c.retirer(ret);
   }
 
   public boolean trouverCompte(String code){
@@ -46,6 +48,23 @@ if (list.isEmpty()){
     }
     }
 }
+
+  public void effectuerVirment(String codeSource,String codeDestination,double montant) {
+        compte src = comptes.get(codeSource);
+        compte dis = comptes.get(codeDestination);
+        if(src == null || dis == null){
+            System.out.println("Compte source ou destination introuvable");
+        }else{
+            if(montant <= 0){
+                System.out.println("le montant doit étre positife");
+            }else{
+                Retrait r = new Retrait(montant,"Virment vers :"+dis.code);
+                src.retirer(r);
+                Versement v = new Versement(dis.code,montant,"Virment depuis"+src.code);
+                dis.deposer(v);
+            }
+        }
+  }
   public void ListOperations(String code){
     compte c = comptes.get(code);
     List<operation> operations = new ArrayList<>(c.listOperations());
