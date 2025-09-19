@@ -3,7 +3,7 @@ package compte;
 import Service.Retrait;
 
 public class compteEpargne extends compte {
-   protected double tauxInteret;
+   private double tauxInteret;
 
    public compteEpargne(String code,double montant,double tauxInteret){
        super(code,montant);

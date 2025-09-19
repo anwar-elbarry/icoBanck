@@ -4,7 +4,7 @@ import Service.Retrait;
 
 public class compteCourant extends compte {
 
- protected double decouvert;
+ private double decouvert;
 
      public compteCourant(String code , double montant,double decouvert){
          super(code,montant);
