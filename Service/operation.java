@@ -30,6 +30,6 @@ public abstract class operation {
 
     @Override
     public String toString() {
-        return "[" + getType() + "] " + "nº=" + numero + ", date=" + date + ", montant=" + montant;
+        return "[" + getType() + "] " + "nº=" + numero + ", date=" + date + ", montant=" + montant +"DH";
     }
 }
