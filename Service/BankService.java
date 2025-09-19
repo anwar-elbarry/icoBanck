@@ -2,6 +2,7 @@ package Service;
 import compte.compte;
 import compte.compteCourant;
 import compte.compteEpargne;
+import utilities.ValidationUtils;
 
 import java.util.*;
 
@@ -11,7 +12,7 @@ private HashMap<String , compte> comptes = new HashMap<>();
 
   public void creerCompteCourant(String code,double montant,double decouvert){
       try{
-          if (montant <= 0){
+          if (ValidationUtils.isValidMontant(montant)){
               System.out.println("Le montant doit être positif.");
           }else {
               compte c = new compteCourant(code,montant,decouvert);
@@ -25,7 +26,7 @@ private HashMap<String , compte> comptes = new HashMap<>();
   }
   public void creerCompteEpargne(String code,double montant,double tauxInteret){
       try {
-          if (montant <= 0){
+          if (ValidationUtils.isValidMontant(montant)){
               System.out.println("Le montant doit être positif.");
           }else {
           compte c = new compteEpargne(code,montant,tauxInteret);
@@ -39,7 +40,7 @@ private HashMap<String , compte> comptes = new HashMap<>();
 
   public void effectuerVersement(String code,double montant,String source){
       try {
-          if (montant <= 0){
+          if (ValidationUtils.isValidMontant(montant)){
               System.out.println("Le montant doit être positif.");
           }else {
           Versement ver = new Versement(code,montant,source);
@@ -54,7 +55,7 @@ private HashMap<String , compte> comptes = new HashMap<>();
 
   public void effectuerRetrait(String code,double montant,String destination){
       try{
-          if (montant <= 0){
+          if (ValidationUtils.isValidMontant(montant)){
               System.out.println("Le montant doit être positif.");
           }else {
           compte c = comptes.get(code);
@@ -98,7 +99,7 @@ private HashMap<String , compte> comptes = new HashMap<>();
           if(src == null || dis == null){
               System.out.println("Compte source ou destination introuvable");
           }else{
-              if(montant <= 0){
+              if(ValidationUtils.isValidMontant(montant)){
                   System.out.println("le montant doit étre positife");
               }else{
                   Retrait r = new Retrait(montant,"Virment vers :"+dis.getCode());
