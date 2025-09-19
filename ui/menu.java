@@ -55,7 +55,7 @@ public class menu {
     }
 
     public static void uiMenu (){
-        System.out.println("\n===== MENU PRINCIPAL =====");
+        System.out.println("\n===== ICOBANK MENU =====");
         System.out.println("1. Créer un compte");
         System.out.println("2. Effectuer un versement");
         System.out.println("3. Effectuer un retrait");
@@ -63,6 +63,7 @@ public class menu {
         System.out.println("5. Consulter solde");
         System.out.println("6. Consulter opérations");
         System.out.println("0. Quitter");
+        System.out.println("========================");
         System.out.print("Votre choix : ");
     }
 
