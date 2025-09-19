@@ -1,5 +1,7 @@
 package ui;
 import Service.BankService;
+
+import java.util.Objects;
 import java.util.Scanner;
 
 public class menu {
@@ -8,43 +10,48 @@ public class menu {
     public static void main(String[] args) throws Exception {
 
         boolean quitter = false;
-
+        try {
         while(!quitter){
-            uiMenu();
-            int choix = sc.nextInt();
-            switch (choix) {
-                case 1:
-                    ajouterCompte();
-                    break;
-                case 2:
-                    effectuerVersement();
-                    break;
+
+                uiMenu();
+                int choix = sc.nextInt();
+                switch (choix) {
+                    case 1:
+                        ajouterCompte();
+                        break;
+                    case 2:
+                        effectuerVersement();
+                        break;
                     case 3:
                         effectuerRetrait();
-                    break;
-                case 4:
-                    effectuearVirment();
-                    break;
-                case 5:
-                    getSolde();
-                    break;
-                case 6 :
-                    getOperations();
-                    break;
-                case 7 :
-                bank.showList();
-                break;
+                        break;
+                    case 4:
+                        effectuearVirment();
+                        break;
+                    case 5:
+                        getSolde();
+                        break;
+                    case 6 :
+                        getOperations();
+                        break;
+                    case 7 :
+                        bank.showList();
+                        break;
 
-                case 0:
-                    quitter = true;
-                    System.out.println("✅ Programme terminé.");
-                    break;
-                default:
-                    System.out.println("❌ Choix invalide !");
-            }
+                    case 0:
+                        quitter = true;
+                        System.out.println("✅ Programme terminé.");
+                        break;
+                    default:
+                        System.out.println("❌ Choix invalide !");
+                }
+
+        }
+            sc.close();
+        }catch (Exception e){
+            System.out.println("Erreur : " + e.getMessage());
         }
 
-       sc.close();
     }
 
     public static void uiMenu (){
@@ -64,34 +71,38 @@ public class menu {
         int type = sc.nextInt();
         if (type == 1){
             System.out.println("deposer un montant : ");
-            int montant = sc.nextInt();
+            double montant = sc.nextDouble();
             System.out.println("ecreer un code pour votre compte(5chiffre) : CPT-");
             String code = sc.next();
             if (!code.matches("\\d{5}")){
                 System.out.println("Code invalide. Entrez exactement 5 chiffres (ex : 01234).");
             }else{
                 System.out.println("ecreer votre decouvert : ");
-                int decouvert = sc.nextInt();
+                double decouvert = sc.nextDouble();
+                boolean isCompte = bank.trouverCompte("CPT-"+code);
+                if (isCompte){
+                    System.out.println("ce code déja exister");
+                }else{
                 bank.creerCompteCourant(code,montant,decouvert);
                 System.out.println("Votre compte a ete creer avec success");
+                }
             }
         } else if (type == 2) {
             System.out.println("deposer un montant : ");
-            int montant = sc.nextInt();
+            double montant = sc.nextDouble();
             System.out.println("ecreer un code pour votre compte : CPT-");
             String code = sc.next();
             if (!code.matches("\\d{5}")) {
                 System.out.println("Code invalide. Entrez exactement 5 chiffres (ex : 01234).");
             }else {
                 System.out.println("ecreer votre tauxInteret : ");
-                int tauxInteret = sc.nextInt();
+                double tauxInteret = sc.nextDouble();
                 bank.creerCompteEpargne(code,montant,tauxInteret);
                 System.out.println("Votre compte a ete creer avec success");
             }
 
         }else {
             System.out.println("❌ Choix invalide !");
-            uiMenu();
         }
     }
 
@@ -101,7 +112,7 @@ public class menu {
         boolean isCompte = bank.trouverCompte(code);
         if (isCompte){
             System.out.println("veuiez entrez le montant :");
-            int montant = sc.nextInt();
+            double montant = sc.nextDouble();
             System.out.println("veuiez entrez le source :");
             String source = sc.next();
             bank.effectuerVersement(code,montant,source);
@@ -138,11 +149,10 @@ public class menu {
         boolean isCompte = bank.trouverCompte(code);
         if (isCompte){
             System.out.println("veuiez entrez le montant :");
-            int montant = sc.nextInt();
+            double montant = sc.nextDouble();
             System.out.println("veuiez entrez la destination :");
             String destination = sc.next();
             bank.effectuerRetrait(code,montant,destination);
-            System.out.println("votre retraita ete effectuer avec success");
         }else {
             System.out.println("Aucun compte trouvé avec ce code.");
         }
@@ -153,9 +163,13 @@ public class menu {
         String src = sc.next();
         System.out.println("veuiz entrez le code de compte de destination  (CPT-XXXXX):");
         String dis = sc.next();
+        if(Objects.equals(src, dis)){
+            System.out.println("⚠️ Erreur : le compte source et le compte de destination ne peuvent pas être identiques.");
+            return;
+        }
             System.out.println("veuiez entrez le montant :");
-            int montant = sc.nextInt();
+        double montant = sc.nextDouble();
             bank.effectuerVirment(src,dis,montant);
-            System.out.println("votre virment a été effectuer avec success");
+        System.out.println("✅ Virement de " + montant + " effectué avec succès de " + src + " vers " + dis + ".");
     }
 }
