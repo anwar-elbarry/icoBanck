@@ -6,27 +6,46 @@ private HashMap<String , compte> comptes = new HashMap<>();
     private String code;
 
   public void creerCompteCourant(String code,double montant,double decouvert){
-    compte c = new compteCourant(code,montant,decouvert);
-    comptes.put(c.getCode(),c);
-    c.afficherDetails();
+      try{
+          compte c = new compteCourant(code,montant,decouvert);
+          comptes.put(c.getCode(),c);
+          c.afficherDetails();
+      }catch (Exception e){
+          System.out.println("error lors du la création de compte");
+      }
+
   }
   public void creerCompteEpargne(String code,double montant,double tauxInteret){
-    compte c = new compteEpargne(code,montant,tauxInteret);
-    comptes.put(c.getCode(),c);
-      c.afficherDetails();
+      try {
+          compte c = new compteEpargne(code,montant,tauxInteret);
+          comptes.put(c.getCode(),c);
+          c.afficherDetails();
+      }catch (Exception e){
+          System.out.println("error lors du la création de compte");
+      }
   }
 
   public void effectuerVersement(String code,double montant,String source){
-        Versement ver = new Versement(code,montant,source);
-        System.out.println("versement de "+montant + "de source("+source+")");
-        compte c = comptes.get(code);
-        c.deposer(ver);
+      try {
+          Versement ver = new Versement(code,montant,source);
+          System.out.println("versement de "+montant + "DH  de source("+source+")");
+          compte c = comptes.get(code);
+          c.deposer(ver);
+      }catch (Exception e){
+          System.out.println("error lors du versement");
+      }
+
   }
 
   public void effectuerRetrait(String code,double montant,String destination){
-      compte c = comptes.get(code);
-      Retrait ret = new Retrait(montant,destination);
-      c.retirer(ret);
+      try{
+          compte c = comptes.get(code);
+          Retrait ret = new Retrait(montant,destination);
+          c.retirer(ret);
+      }catch (Exception e){
+          System.out.println("error lors du retrait");
+      }
+
   }
 
   public boolean trouverCompte(String code){
@@ -39,38 +58,57 @@ private HashMap<String , compte> comptes = new HashMap<>();
   }
 
   public void showList() {
-    ArrayList<compte> list = new ArrayList<>(comptes.values());
-if (list.isEmpty()){
-  System.out.println("no comptes");
-}else {
-    for (compte c : list) {
-      c.afficherDetails();
-    }
-    }
+      try{
+          ArrayList<compte> list = new ArrayList<>(comptes.values());
+          if (list.isEmpty()){
+              System.out.println("Aucun compte n'est enregistré pour le moment.");
+          }else {
+              for (compte c : list) {
+                  c.afficherDetails();
+              }
+          }
+      }catch (Exception e){
+          System.out.println("error lors de afficher la liste");
+      }
+
 }
 
   public void effectuerVirment(String codeSource,String codeDestination,double montant) {
-        compte src = comptes.get(codeSource);
-        compte dis = comptes.get(codeDestination);
-        if(src == null || dis == null){
-            System.out.println("Compte source ou destination introuvable");
-        }else{
-            if(montant <= 0){
-                System.out.println("le montant doit étre positife");
-            }else{
-                Retrait r = new Retrait(montant,"Virment vers :"+dis.code);
-                src.retirer(r);
-                Versement v = new Versement(dis.code,montant,"Virment depuis"+src.code);
-                dis.deposer(v);
-            }
-        }
+      try {
+          compte src = comptes.get(codeSource);
+          compte dis = comptes.get(codeDestination);
+          if(src == null || dis == null){
+              System.out.println("Compte source ou destination introuvable");
+          }else{
+              if(montant <= 0){
+                  System.out.println("le montant doit étre positife");
+              }else{
+                  Retrait r = new Retrait(montant,"Virment vers :"+dis.code);
+                  src.retirer(r);
+                  Versement v = new Versement(dis.code,montant,"Virment depuis"+src.code);
+                  dis.deposer(v);
+              }
+          }
+      }catch (Exception e){
+          System.out.println("error lors du virment");
+      }
+
   }
   public void ListOperations(String code){
-    compte c = comptes.get(code);
-    List<operation> operations = new ArrayList<>(c.listOperations());
-    System.out.println("Opérations pour le compte " + code + ":");
-    for (operation o :operations){
-      System.out.println(o.toString());
-    }
+      try {
+          compte c = comptes.get(code);
+          List<operation> operations = new ArrayList<>(c.listOperations());
+          System.out.println("Opérations pour le compte " + code + ":");
+          if (operations.isEmpty()){
+              System.out.println("pas de operations en ce compte");
+          }else {
+              for (operation o :operations){
+                  System.out.println(o.toString());
+              }
+          }
+      }catch (Exception e){
+          System.out.println("error lors de l'affichage des operations");
+      }
+
   }
 }
