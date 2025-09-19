@@ -7,9 +7,13 @@ private HashMap<String , compte> comptes = new HashMap<>();
 
   public void creerCompteCourant(String code,double montant,double decouvert){
       try{
-          compte c = new compteCourant(code,montant,decouvert);
-          comptes.put(c.getCode(),c);
-          c.afficherDetails();
+          if (montant <= 0){
+              System.out.println("Le montant doit être positif.");
+          }else {
+              compte c = new compteCourant(code,montant,decouvert);
+              comptes.put(c.getCode(),c);
+              c.afficherDetails();
+          }
       }catch (Exception e){
           System.out.println("error lors du la création de compte");
       }
@@ -17,9 +21,13 @@ private HashMap<String , compte> comptes = new HashMap<>();
   }
   public void creerCompteEpargne(String code,double montant,double tauxInteret){
       try {
+          if (montant <= 0){
+              System.out.println("Le montant doit être positif.");
+          }else {
           compte c = new compteEpargne(code,montant,tauxInteret);
           comptes.put(c.getCode(),c);
           c.afficherDetails();
+          }
       }catch (Exception e){
           System.out.println("error lors du la création de compte");
       }
@@ -27,25 +35,31 @@ private HashMap<String , compte> comptes = new HashMap<>();
 
   public void effectuerVersement(String code,double montant,String source){
       try {
+          if (montant <= 0){
+              System.out.println("Le montant doit être positif.");
+          }else {
           Versement ver = new Versement(code,montant,source);
           System.out.println("versement de "+montant + "DH  de source("+source+")");
           compte c = comptes.get(code);
           c.deposer(ver);
+          }
       }catch (Exception e){
           System.out.println("error lors du versement");
       }
-
   }
 
   public void effectuerRetrait(String code,double montant,String destination){
       try{
+          if (montant <= 0){
+              System.out.println("Le montant doit être positif.");
+          }else {
           compte c = comptes.get(code);
           Retrait ret = new Retrait(montant,destination);
           c.retirer(ret);
+          }
       }catch (Exception e){
           System.out.println("error lors du retrait");
       }
-
   }
 
   public boolean trouverCompte(String code){
