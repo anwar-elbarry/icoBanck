@@ -3,6 +3,7 @@ import Service.BankService;
 
 import java.util.Objects;
 import java.util.Scanner;
+import utilities.ValidationUtils;
 
 public class menu {
     public static Scanner sc = new Scanner(System.in);
@@ -75,7 +76,7 @@ public class menu {
             double montant = sc.nextDouble();
             System.out.println("ecreer un code pour votre compte(5chiffre) : CPT-");
             String code = sc.next();
-            if (!code.matches("\\d{5}")){
+            if (!ValidationUtils.isValidCode(code)){
                 System.out.println("Code invalide. Entrez exactement 5 chiffres (ex : 01234).");
             }else{
                 System.out.println("ecreer votre decouvert : ");
@@ -93,7 +94,7 @@ public class menu {
             double montant = sc.nextDouble();
             System.out.println("ecreer un code pour votre compte : CPT-");
             String code = sc.next();
-            if (!code.matches("\\d{5}")) {
+            if (!ValidationUtils.isValidCode(code)) {
                 System.out.println("Code invalide. Entrez exactement 5 chiffres (ex : 01234).");
             }else {
                 System.out.println("ecreer votre tauxInteret : ");
