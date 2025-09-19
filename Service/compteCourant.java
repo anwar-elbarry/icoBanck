@@ -10,12 +10,16 @@ public class compteCourant extends compte {
      }
 
      @Override
-    public void retirer(Retrait r) {
-         if(solde - r.montant >= -decouvert){
-             this.solde -= r.montant;
-             ajouterOperation(r);
-         }else{
-             System.out.println("⚠\uFE0F Retrait refusé : dépassement du découvert autorisé.");
+    public void retirer(Retrait r){
+         try {
+             if (solde - r.montant >= -decouvert) {
+                 this.solde -= r.montant;
+                 ajouterOperation(r);
+             } else {
+                 System.out.println("⚠\uFE0F Retrait refusé : dépassement du découvert autorisé.");
+             }
+         }catch (Exception e){
+             System.out.println(e.getMessage());
          }
     }
     @Override
