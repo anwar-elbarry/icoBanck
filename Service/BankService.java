@@ -1,4 +1,8 @@
 package Service;
+import compte.compte;
+import compte.compteCourant;
+import compte.compteEpargne;
+
 import java.util.*;
 
 public class BankService {
@@ -68,7 +72,7 @@ private HashMap<String , compte> comptes = new HashMap<>();
   }
 
   public double trouverSolde(String code){
-      return comptes.get(code).solde;
+      return comptes.get(code).getSolde();
   }
 
   public void showList() {
@@ -97,9 +101,9 @@ private HashMap<String , compte> comptes = new HashMap<>();
               if(montant <= 0){
                   System.out.println("le montant doit étre positife");
               }else{
-                  Retrait r = new Retrait(montant,"Virment vers :"+dis.code);
+                  Retrait r = new Retrait(montant,"Virment vers :"+dis.getCode());
                   src.retirer(r);
-                  Versement v = new Versement(dis.code,montant,"Virment depuis"+src.code);
+                  Versement v = new Versement(dis.getCode(),montant,"Virment depuis"+src.getCode());
                   dis.deposer(v);
               }
           }
@@ -114,7 +118,7 @@ private HashMap<String , compte> comptes = new HashMap<>();
           List<operation> operations = new ArrayList<>(c.listOperations());
           System.out.println("Opérations pour le compte " + code + ":");
           if (operations.isEmpty()){
-              System.out.println("pas de operations en ce compte");
+              System.out.println("Aucune opération disponible pour ce compte.");
           }else {
               for (operation o :operations){
                   System.out.println(o.toString());
