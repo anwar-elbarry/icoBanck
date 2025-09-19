@@ -1,4 +1,6 @@
-package Service;
+package compte;
+
+import Service.Retrait;
 
 public class compteCourant extends compte {
 
@@ -12,9 +14,10 @@ public class compteCourant extends compte {
      @Override
     public void retirer(Retrait r){
          try {
-             if (solde - r.montant >= -decouvert) {
-                 this.solde -= r.montant;
+             if (solde - r.getMontant() >= -decouvert) {
+                 this.solde -= r.getMontant();
                  ajouterOperation(r);
+                 System.out.println("votre retraita ete effectuer avec success");
              } else {
                  System.out.println("⚠\uFE0F Retrait refusé : dépassement du découvert autorisé.");
              }

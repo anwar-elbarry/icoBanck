@@ -1,4 +1,6 @@
-package Service;
+package compte;
+
+import Service.Retrait;
 
 public class compteEpargne extends compte {
    protected double tauxInteret;
@@ -11,8 +13,8 @@ public class compteEpargne extends compte {
     @Override
     public void retirer(Retrait r) {
        try{
-           if(solde >= r.montant){
-               this.solde -= r.montant ;
+           if(solde >= r.getMontant()){
+               this.solde -= r.getMontant();
                ajouterOperation(r);
            }else{
                System.out.println("⚠\uFE0F Retrait refusé : solde insuffisant.");
